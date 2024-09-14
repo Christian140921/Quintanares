@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1, h2 {
+            color: #333;    
+            text-align: center;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #4490d8;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            margin-bottom: 1rem;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #41a4de;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #3b78b9ea;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Usuario</h1>
+        
+        <div id="userTypeSelection">
+            <h2>Seleccione el tipo de usuario:</h2>
+            <div class="btn-group">
+                <button class="btn" onclick="showForm('vigilante')">Vigilante</button>
+                <button class="btn" onclick="showForm('administrador')">Administrador</button>
+                <button class="btn" onclick="showForm('usuario')">Usuario</button>
+            </div>
+        </div>
+
+        <div id="vigilanteForm" class="hidden">
+            <h2>Registro de Vigilante</h2>
+            <form onsubmit="submitForm('vigilante'); return false;">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="password" placeholder="Contraseña" required>
+                <input type="text" placeholder="Número de identificación" required>
+                <input type="submit" value="Registrar" class="btn">
+            </form>
+        </div>
+
+        <div id="administradorForm" class="hidden">
+            <h2>Registro de Administrador</h2>
+            <form onsubmit="submitForm('administrador'); return false;">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="password" placeholder="Contraseña" required>
+                <input type="text" placeholder="Departamento" required>
+                <input type="submit" value="Registrar" class="btn">
+                <input type="submit" value="Volver" class="btn">
+            </form>
+        </div>
+
+        <div id="usuarioForm" class="hidden">
+            <h2>Registro de Usuario Normal</h2>
+            <form onsubmit="submitForm('usuario'); return false;">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="password" placeholder="Contraseña" required>
+                <input type="submit" value="Registrar" class="btn">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForm(userType) {
+            document.getElementById('userTypeSelection').classList.add('hidden');
+            document.getElementById(userType + 'Form').classList.remove('hidden');
+        }
+
+        function submitForm(userType) {
+            alert('Formulario de ' + userType + ' enviado. Aquí procesaríamos la información y crearíamos la cuenta.');
+            alert('Redirigiendo al área de ' + userType + '...');
+        }
+    </script>
+</body>
+</html>

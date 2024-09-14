@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200">
+    <div class="w-full max-w-md">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-lock text-5xl text-indigo-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-center text-gray-800">Restablecer Contraseña</h2>
+                <p class="text-center text-sm text-gray-600">
+                    Ingresa tu correo electrónico para recibir instrucciones
+                </p>
+                <form id="resetForm">
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <label for="email" class="text-sm font-medium text-gray-700">
+                                Correo Electrónico
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="tu@email.com"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            >
+                        </div>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="w-full mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+                    >
+                        Enviar Correo de Restablecimiento
+                    </button>
+                </form>
+                <div id="alert" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4" role="alert">
+                    <p>Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.</p>
+                </div>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
+                <p class="text-center text-sm text-gray-600">
+                    ¿Recordaste tu contraseña? <a href="parking-login-tailwind.html" class="text-indigo-600 hover:underline">Volver al inicio de sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('resetForm').style.display = 'none';
+            document.getElementById('alert').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
+    

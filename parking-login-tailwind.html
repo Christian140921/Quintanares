@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Gestión de Parqueadero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl">
+        <!-- Formulario de Inicio de Sesión -->
+        <div id="loginForm">
+            <div class="text-center">
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Iniciar Sesión</h2>
+            </div>
+            <form class="mt-8 space-y-6" onsubmit="return false;">
+                <input type="hidden" name="remember" value="true">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div>
+                        <label for="username" class="sr-only">Usuario</label>
+                        <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Usuario">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Contraseña</label>
+                        <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" onclick="login()" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+            <div class="text-sm text-center mt-4">
+                <a href="restablecer.html" onclick="showForgotPassword()" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
+            <div class="text-sm text-center mt-2">
+                <a href="#" onclick="showRoleSelection()" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    ¿No tienes cuenta? Crear cuenta
+                </a>
+            </div>
+        </div>
+
+        <!-- Selección de Rol -->
+        <div id="roleSelection" class="hidden">
+            <div class="text-center">
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Seleccionar Rol</h2>
+            </div>
+            <div class="mt-8">
+                <select id="roleSelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="">Seleccione un rol</option>
+                    <option value="usuario">Usuario</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="vigilante">Vigilante</option>
+                </select>
+                <button onclick="showRegistrationForm()" class="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Continuar
+                </button>
+            </div>
+            <div class="text-sm text-center mt-4">
+                <a href="#" onclick="showLoginForm()" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Volver al inicio de sesión
+                </a>
+            </div>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div id="registrationForm" class="hidden">
+            <div class="text-center">
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Registro</h2>
+            </div>
+            <form id="regForm" class="mt-8 space-y-6" onsubmit="return false;">
+                <input type="hidden" name="remember" value="true">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div>
+                        <label for="regUsername" class="sr-only">Usuario</label>
+                        <input id="regUsername" name="regUsername" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Usuario">
+                    </div>
+                    <div>
+                        <label for="regPassword" class="sr-only">Contraseña</label>
+                        <input id="regPassword" name="regPassword" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Contraseña">
+                    </div>
+                    <div>
+                        <label for="regEmail" class="sr-only">Correo electrónico</label>
+                        <input id="regEmail" name="regEmail" type="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Correo electrónico">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" onclick="register()" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Registrarse
+                    </button>
+                </div>
+            </form>
+            <div class="text-sm text-center mt-4">
+                <a href="#" onclick="showRoleSelection()" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Volver a selección de rol
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLoginForm() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+        }
+
+        function showRoleSelection() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('roleSelection').classList.remove('hidden');
+            document.getElementById('registrationForm').classList.add('hidden');
+        }
+
+        function showRegistrationForm() {
+            const role = document.getElementById('roleSelect').value;
+            if (!role) {
+                alert('Por favor, seleccione un rol.');
+                return;
+            }
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('roleSelection').classList.add('hidden');
+            document.getElementById('registrationForm').classList.remove('hidden');
+
+            // Limpiar campos adicionales previos
+            const form = document.getElementById('regForm');
+            const existingFields = form.querySelectorAll('.dynamic-field');
+            existingFields.forEach(field => field.remove());
+
+            // Agregar campos específicos según el rol
+            if (role === 'vigilante') {
+                addField('regEmployeeNumber', 'Número de empleado');
+            } else if (role === 'administrador') {
+                addField('regAdminCode', 'Código de administrador');
+            } else if (role === 'usuario') {
+                addField('regVehicleType', 'Tipo de vehículo');
+                addField('regLicensePlate', 'Placa del vehículo');
+            }
+        }
+
+        function addField(id, placeholder) {
+            const input = document.createElement('div');
+            input.className = 'dynamic-field';
+            input.innerHTML = `
+                <label for="${id}" class="sr-only">${placeholder}</label>
+                <input id="${id}" name="${id}" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="${placeholder}">
+            `;
+            document.getElementById('regForm').insertBefore(input, document.querySelector('#regForm button').parentNode);
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            console.log('Iniciando sesión:', username, password);
+            alert('Función de inicio de sesión no implementada');
+        }
+
+        function register() {
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const email = document.getElementById('regEmail').value;
+            const role = document.getElementById('roleSelect').value;
+
+            let additionalInfo = {};
+            if (role === 'vigilante') {
+                additionalInfo.employeeNumber = document.getElementById('regEmployeeNumber').value;
+            } else if (role === 'administrador') {
+                additionalInfo.adminCode = document.getElementById('regAdminCode').value;
+            } else if (role === 'usuario') {
+                additionalInfo.vehicleType = document.getElementById('regVehicleType').value;
+                additionalInfo.licensePlate = document.getElementById('regLicensePlate').value;
+            }
+
+            console.log('Registrando:', { username, email, role, ...additionalInfo });
+            alert('Registro exitoso (simulado)');
+            showLoginForm();
+        }
+
+        function showForgotPassword() {
+            alert('Funcionalidad de recuperación de contraseña no implementada');
+        }
+    </script>
+</body>
+</html>
